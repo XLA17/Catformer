@@ -2,13 +2,14 @@ extends CharacterBody2D
 
 
 const SPEED = 200.0
-const ACCELERATION = 500.0
+const ACCELERATION = 1000.0
 const FRICTION = 2000.0
 const JUMP_VELOCITY = -300.0
 const DASH_SPEED = 600.0
 const MAX_HEALTH = 100
 const DAMAGE_DEALT = 20
 
+var floatingTime = 0.0
 var isDashing = false
 var isAttacking = false
 var isDead = false
@@ -22,10 +23,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 
 	if !isDead:
+		_setGravity(delta)
 		_dash()
 		_jump()
 		_move(delta)
-		_setGravity(delta)
 		_attack()
 		move_and_slide()
 		_animation_played()
@@ -33,7 +34,10 @@ func _physics_process(delta: float) -> void:
 
 func _setGravity(delta: float):
 	if not is_on_floor():
+		floatingTime += delta
 		velocity += get_gravity() * delta
+	else:
+		floatingTime = 0.0
 
 func _move(delta: float):
 	if isDashing:
@@ -48,7 +52,7 @@ func _move(delta: float):
 func _jump():
 	if isDashing:
 		return
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and (is_on_floor() or floatingTime <= 0.1):
 		velocity.y = JUMP_VELOCITY
 
 
