@@ -1,0 +1,12 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c5jidy5boqfm1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tp1rt"]
+bg_color = Color(0.41675407, 8.4830447e-07, 2.1658838e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mjqb"]
+bg_color = Color(1, 0, 0, 1)
+
+[resource]
+HealthBar/base_type = &"ProgressBar"
+HealthBar/styles/background = SubResource("StyleBoxFlat_tp1rt")
+HealthBar/styles/fill = SubResource("StyleBoxFlat_7mjqb")
