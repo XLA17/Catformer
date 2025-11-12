@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 
 const SPEED = 200.0
+const ACCELERATION = 500.0
+const FRICTION = 2000.0
 const JUMP_VELOCITY = -300.0
 const DASH_SPEED = 600.0
 const MAX_HEALTH = 100
@@ -18,31 +20,30 @@ func _ready() -> void:
 	Ui.setMaxHealth(MAX_HEALTH)
 
 func _physics_process(delta: float) -> void:
-	_setGravity(delta)
 
 	if !isDead:
 		_dash()
 		_jump()
-		_move()
+		_move(delta)
+		_setGravity(delta)
 		_attack()
 		move_and_slide()
-	_animation_played()
+		_animation_played()
 	
 
 func _setGravity(delta: float):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-func _move():
+func _move(delta: float):
 	if isDashing:
 		return
 	
-	var direction := Input.get_axis("move_left", "move_right")
-	if direction:
-		velocity.x = direction * SPEED
+	var input = Input.get_axis("move_left", "move_right")
+	if input:
+		velocity = velocity.move_toward(Vector2(input * SPEED, velocity.y), delta * ACCELERATION)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
+		velocity = velocity.move_toward(Vector2(0, velocity.y), delta * FRICTION)
 
 func _jump():
 	if isDashing:
@@ -93,8 +94,6 @@ func takeDamage(damage: int):
 
 
 func _animation_played():
-	if isDead:
-		return
 	if isTakingDamage:
 		$Animation.play("Take_Damage")
 		return
