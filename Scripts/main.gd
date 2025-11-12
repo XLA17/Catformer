@@ -15,10 +15,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	cameraMovement()
+	cameraMovement(delta)
 
 
-func cameraMovement():
+
+
+func cameraMovement(delta):
 	var camX = $Camera2D.position.x
 	var playerX = $Player.position.x
 	var camY = $Camera2D.position.y
@@ -34,6 +36,8 @@ func cameraMovement():
 			$Camera2D.position.y = playerY + OFFSET_CAMERA_PLAYER
 		elif camY < playerY:
 			$Camera2D.position.y = playerY - OFFSET_CAMERA_PLAYER
+			
+
 
 func nextLevel():
 	currentLevel += 1
