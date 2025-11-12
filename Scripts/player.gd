@@ -77,6 +77,8 @@ func _attack():
 					body.takeDamage(DAMAGE_DEALT)
 
 func takeDamage(damage: int):
+	if health <= 0:
+		return
 	print("Player take damage")
 	$Animation.play("Take_Damage")
 	isTakingDamage = true
@@ -87,11 +89,11 @@ func takeDamage(damage: int):
 		health = 0
 		Ui.updateHealth(health)
 		isDead = true
+		$Animation.play("Death")
 
 
 func _animation_played():
 	if isDead:
-		$Animation.play("Death")
 		return
 	if isTakingDamage:
 		$Animation.play("Take_Damage")
