@@ -14,13 +14,13 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	cameraMovement(delta)
+func _process(_delta: float) -> void:
+	cameraMovement()
 
 
 
 
-func cameraMovement(delta):
+func cameraMovement():
 	var camX = $Camera2D.position.x
 	var playerX = $Player.position.x
 	var camY = $Camera2D.position.y
@@ -46,6 +46,3 @@ func nextLevel():
 	level = Levels.loadScene(currentLevel)
 	$Player.position = level.get_node("PlayerStartPos").position
 	call_deferred("add_child", level)
-	
-func addNextLevel(level: Node2D):
-	add_child(level)
