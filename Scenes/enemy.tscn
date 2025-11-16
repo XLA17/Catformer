@@ -133,6 +133,8 @@ shape = SubResource("RectangleShape2D_afpow")
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]
 [connection signal="body_entered" from="AttackZone" to="." method="_on_attack_zone_body_entered"]

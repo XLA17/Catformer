@@ -9,6 +9,10 @@ var _target: Node2D = null
 var direction = 1
 var health
 
+var deathSound = preload("res://Sound/Enemy_death.mp3")
+var attackSound = preload("res://Sound/Enemy_attack.mp3")
+var hitSound = preload("res://Sound/Enemy_hit.mp3")
+
 func _ready() -> void:
 	health = MAX_HEALTH
 	velocity.x = SPEED
@@ -38,13 +42,20 @@ func _move():
 func takeDamage(damage: int):
 	print("enemy take damage")
 	health -= damage
+	playSound(hitSound)
 	if health <= 0:
+		playSound(deathSound)
 		queue_free()
+
+func playSound(sound):
+	$Audio.stream = sound
+	$Audio.play()
 
 func _attack(body: Node2D):
 	if body.has_method("takeDamage") && !body.isTakingDamage:
 		body.takeDamage(DAMAGE_DEALT)
 		$AttackTimer.start()
+		playSound(attackSound)
 
 
 func _on_detection_zone_body_entered(body: Node2D) -> void:

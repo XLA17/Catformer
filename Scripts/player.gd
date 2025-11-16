@@ -16,6 +16,9 @@ var isDead = false
 var isTakingDamage = false
 var health
 
+var deathSound = preload("res://Sound/Death_sound.mp3")
+var attackSound = preload("res://Sound/Attack_sound.wav")
+
 func _ready() -> void:
 	health = MAX_HEALTH
 	Ui.setMaxHealth(MAX_HEALTH)
@@ -70,6 +73,7 @@ func _attack():
 	if Input.is_action_just_pressed("attack") && !isAttacking:
 		print("attack")
 		isAttacking = true
+		playSound(attackSound)
 		if abs(velocity.x) > 0.01 || abs(velocity.y) > 0.01:
 			$Animation.play("Jump_Attack")
 		else:
@@ -94,7 +98,12 @@ func takeDamage(damage: int):
 		health = 0
 		Ui.updateHealth(health)
 		isDead = true
+		playSound(deathSound)
 		$Animation.play("Death")
+
+func playSound(sound):
+	$Audio.stream = sound
+	$Audio.play()
 
 
 func _animation_played():
