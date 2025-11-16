@@ -9,6 +9,10 @@ var _target: Node2D = null
 var direction = 1
 var health
 
+var isAttacking = false
+var isDead = false
+var isTakingDamage = false
+
 var deathSound = preload("res://Sound/Enemy_death.mp3")
 var attackSound = preload("res://Sound/Enemy_attack.mp3")
 var hitSound = preload("res://Sound/Enemy_hit.mp3")
@@ -41,22 +45,35 @@ func _move():
 
 func takeDamage(damage: int):
 	print("enemy take damage")
+	isTakingDamage = true
+	$HitTimer.start()
 	health -= damage
 	playSound(hitSound)
 	if health <= 0:
+		isDead = true
 		playSound(deathSound)
-		queue_free()
+		$DeathTimer.start()
 
 func playSound(sound):
 	$Audio.stream = sound
 	$Audio.play()
 
 func _attack(body: Node2D):
-	if body.has_method("takeDamage") && !body.isTakingDamage:
+	if body.has_method("takeDamage") && !body.isTakingDamage && isTakingDamage:
 		body.takeDamage(DAMAGE_DEALT)
+		isAttacking = true
 		$AttackTimer.start()
 		playSound(attackSound)
 
+func enemyAnimation():
+	if(isDead):
+		return
+	if(isTakingDamage):
+		$Animation.play("take_damage")
+	elif(isAttacking):
+		$Animation.play("attack")
+	else:
+		$Animation.play("move") 
 
 func _on_detection_zone_body_entered(body: Node2D) -> void:
 	print("enter")
@@ -74,7 +91,16 @@ func _on_attack_zone_body_entered(body: Node2D) -> void:
 
 
 func _on_attack_timer_timeout() -> void:
+	isAttacking = false
 	var overlapping_bodies = $AttackZone.get_overlapping_bodies()
 	if overlapping_bodies.size() > 0:
 		for body in overlapping_bodies:
 			_attack(body)
+
+
+func _on_death_timer_timeout() -> void:
+	queue_free()
+
+
+func _on_hit_timer_timeout() -> void:
+	isTakingDamage = false
