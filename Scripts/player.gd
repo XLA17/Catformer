@@ -6,8 +6,8 @@ const ACCELERATION = 1000.0
 const FRICTION = 2000.0
 const JUMP_VELOCITY = -300.0
 const DASH_SPEED = 600.0
-const MAX_HEALTH = 100
-const DAMAGE_DEALT = 20
+const MAX_HEALTH = 9
+const DAMAGE_DEALT = 2
 
 var floatingTime = 0.0
 var isDashing = false
@@ -92,14 +92,15 @@ func takeDamage(damage: int):
 	$Animation.play("Take_Damage")
 	isTakingDamage = true
 	health -= damage
-	Ui.updateHealth(health)
 	$InvulnerabilityTimer.start()
 	if health <= 0:
 		health = 0
-		Ui.updateHealth(health)
 		isDead = true
 		playSound(deathSound)
 		$Animation.play("Death")
+		#$Collider.disabled = true
+		set_physics_process(false)
+	Ui.updateHealth(health)
 
 func playSound(sound):
 	$Audio.stream = sound

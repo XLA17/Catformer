@@ -38,6 +38,5 @@ shape = SubResource("RectangleShape2D_q12u6")
 [node name="KillZone" parent="." instance=ExtResource("4_jghel")]
 position = Vector2(253, 87)
 scale = Vector2(6.1199975, 1)
-collision_layer = 7
 
 [connection signal="body_entered" from="NextLevelZone" to="." method="_on_next_level_zone_body_entered"]
