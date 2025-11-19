@@ -84,22 +84,26 @@ func _attack():
 				if body.has_method("takeDamage"):
 					body.takeDamage(DAMAGE_DEALT)
 
-func takeDamage(damage: int):
+func takeDamage():
 	if health <= 0:
 		return
 	print("Player take damage")
 	$Animation.play("Take_Damage")
 	isTakingDamage = true
-	health -= damage
+	health -= 1
 	$InvulnerabilityTimer.start()
-	if health <= 0:
-		health = 0
-		isDead = true
-		playSound(deathSound)
-		$Animation.play("Death")
-		#$Collider.disabled = true
-		set_physics_process(false)
 	Ui.updateHealth()
+	if health <= 0:
+		death()
+
+func death():
+	health = 0
+	isDead = true
+	playSound(deathSound)
+	$Animation.play("Death")
+	set_physics_process(false)
+	$Collider.queue_free()
+	Ui.emptyHealth()
 
 func playSound(sound):
 	$Audio.stream = sound
