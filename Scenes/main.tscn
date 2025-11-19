@@ -1,17 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkkgnbnejira1"]
+[gd_scene load_steps=4 format=3 uid="uid://bkkgnbnejira1"]
 
 [ext_resource type="Script" uid="uid://bxnd3hlevhi8x" path="res://Scripts/main.gd" id="1_8gbba"]
-[ext_resource type="Texture2D" uid="uid://dktltsw1qcxxo" path="res://Background/background 2/orig_big.png" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dmkkqwuh3bgjq" path="res://Scenes/player.tscn" id="3_kry3j"]
 [ext_resource type="PackedScene" uid="uid://b4ltq7epld6t1" path="res://Scenes/transition.tscn" id="4_jjvhh"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_8gbba")
-
-[node name="OrigBig" type="Sprite2D" parent="."]
-position = Vector2(2, 20)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_8gbba")
 
 [node name="Player" parent="." instance=ExtResource("3_kry3j")]
 position = Vector2(43, 37)
