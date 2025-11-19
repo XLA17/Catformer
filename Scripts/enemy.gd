@@ -24,7 +24,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_setGravity(delta)
 	_move()
-
+	
 func start():
 	set_physics_process(true)
 	pass
@@ -43,8 +43,11 @@ func _move():
 			direction = -1
 	else:
 		if is_on_wall():
-			direction *= -1
-			$Animation.flip_h = !$Animation.flip_h
+			changeDirection()
+
+func changeDirection():
+	direction *= -1
+	$Animation.flip_h = !$Animation.flip_h
 
 func takeDamage(damage: int):
 	print("enemy take damage")
@@ -105,3 +108,8 @@ func _on_death_timer_timeout() -> void:
 
 func _on_hit_timer_timeout() -> void:
 	isTakingDamage = false
+
+
+func _on_foot_zone_area_exited(area: Area2D) -> void:
+	print("test")
+	changeDirection()
