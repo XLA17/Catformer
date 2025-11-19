@@ -8,9 +8,11 @@ var level: Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	level = Levels.loadScene(currentLevel)
+	transitionLevel(level.name)
 	level.connect("nextLevel", Callable(self, "nextLevel"))
 	$Player.position = level.get_node("PlayerStartPos").position
 	add_child(level)
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,11 +40,16 @@ func cameraMovement():
 			$Camera2D.position.y = playerY - OFFSET_CAMERA_PLAYER
 			
 
+func transitionLevel(levelName):
+	$Transition.get_child(0).get_child(1).text = levelName
+	$Transition.get_child(0).play("Level_Fade_In")
 
 func nextLevel():
 	currentLevel += 1
+
 	print(level)
 	level.queue_free()
 	level = Levels.loadScene(currentLevel)
+	transitionLevel(level.name)
 	$Player.position = level.get_node("PlayerStartPos").position
 	call_deferred("add_child", level)
