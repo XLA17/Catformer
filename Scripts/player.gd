@@ -21,7 +21,6 @@ var attackSound = preload("res://Sound/Attack_sound.wav")
 
 func _ready() -> void:
 	health = MAX_HEALTH
-	Ui.setMaxHealth(MAX_HEALTH)
 
 func _physics_process(delta: float) -> void:
 
@@ -100,7 +99,7 @@ func takeDamage(damage: int):
 		$Animation.play("Death")
 		#$Collider.disabled = true
 		set_physics_process(false)
-	Ui.updateHealth(health)
+	Ui.updateHealth()
 
 func playSound(sound):
 	$Audio.stream = sound
