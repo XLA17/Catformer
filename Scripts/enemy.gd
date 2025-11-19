@@ -19,11 +19,15 @@ var hitSound = preload("res://Sound/Enemy_hit.mp3")
 func _ready() -> void:
 	health = MAX_HEALTH
 	velocity.x = SPEED
+	set_physics_process(false)
 	
 func _physics_process(delta: float) -> void:
 	_setGravity(delta)
 	_move()
 
+func start():
+	set_physics_process(true)
+	pass
 
 func _setGravity(delta: float):
 	if not is_on_floor():

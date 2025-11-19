@@ -13,6 +13,7 @@ func _ready() -> void:
 	$Player.position = level.get_node("PlayerStartPos").position
 	add_child(level)
 	
+	$Transition.connect("anim_transition_finished", Callable(self, "_on_transition_finished"))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,7 +21,9 @@ func _process(_delta: float) -> void:
 	cameraMovement()
 
 
-
+func _on_transition_finished():
+	level.startLevel()
+	pass
 
 func cameraMovement():
 	var camX = $Camera2D.position.x
@@ -41,6 +44,7 @@ func cameraMovement():
 			
 
 func transitionLevel(levelName):
+	#get_tree().paused = true
 	$Transition.get_child(0).get_child(1).text = levelName
 	$Transition.get_child(0).play("Level_Fade_In")
 
