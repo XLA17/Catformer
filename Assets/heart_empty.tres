@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cep3843n3y61n"]
+
+[ext_resource type="Texture2D" uid="uid://c4ntel0i0vlkh" path="res://Tilesets/Heart_ManaUi.png" id="1_ry87r"]
+
+[resource]
+atlas = ExtResource("1_ry87r")
+region = Rect2(33, 13, 10, 9)

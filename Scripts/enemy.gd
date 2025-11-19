@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 
 const SPEED = 50.0
-const MAX_HEALTH = 50
-const DAMAGE_DEALT = 10
+const MAX_HEALTH = 5
+const DAMAGE_DEALT = 1
 
 var _target: Node2D = null
 var direction = 1
@@ -59,7 +59,7 @@ func playSound(sound):
 	$Audio.play()
 
 func _attack(body: Node2D):
-	if body.has_method("takeDamage") && !body.isTakingDamage && isTakingDamage:
+	if body.has_method("takeDamage") && !body.isTakingDamage && !isTakingDamage:
 		body.takeDamage(DAMAGE_DEALT)
 		isAttacking = true
 		$AttackTimer.start()
@@ -76,12 +76,10 @@ func enemyAnimation():
 		$Animation.play("move") 
 
 func _on_detection_zone_body_entered(body: Node2D) -> void:
-	print("enter")
 	_target = body
 
 
 func _on_detection_zone_body_exited(body: Node2D) -> void:
-	print("exit")
 	if _target == body:
 		_target = null
 
