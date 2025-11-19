@@ -19,3 +19,7 @@ func updateHealth():
 	currentHeart -= 1
 	if currentHeart >= 0:
 		$Hearts.get_child(currentHeart).play("heart")
+
+func emptyHealth():
+	for heart in $Hearts.get_children():
+		heart.play("empty")

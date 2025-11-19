@@ -3,7 +3,6 @@ extends CharacterBody2D
 
 const SPEED = 50.0
 const MAX_HEALTH = 5
-const DAMAGE_DEALT = 1
 
 var _target: Node2D = null
 var direction = 1
@@ -60,7 +59,7 @@ func playSound(sound):
 
 func _attack(body: Node2D):
 	if body.has_method("takeDamage") && !body.isTakingDamage && !isTakingDamage:
-		body.takeDamage(DAMAGE_DEALT)
+		body.takeDamage()
 		isAttacking = true
 		$AttackTimer.start()
 		playSound(attackSound)
