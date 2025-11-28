@@ -23,7 +23,7 @@ func _process(_delta: float) -> void:
 
 func _on_transition_finished():
 	level.startLevel()
-	$Player.start
+	$Player.start()
 	pass
 
 func cameraMovement():
@@ -55,6 +55,7 @@ func nextLevel():
 	level = Levels.loadScene(currentLevel)
 	transitionLevel(level.name)
 	$LoadingTimer.start()
+	$Player.pause()
 
 
 func _on_loading_timer_timeout() -> void:
