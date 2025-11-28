@@ -23,6 +23,7 @@ func _process(_delta: float) -> void:
 
 func _on_transition_finished():
 	level.startLevel()
+	$Player.start
 	pass
 
 func cameraMovement():

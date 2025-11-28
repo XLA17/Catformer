@@ -21,6 +21,7 @@ var attackSound = preload("res://Sound/Attack_sound.wav")
 
 func _ready() -> void:
 	health = MAX_HEALTH
+	set_physics_process(false)
 
 func _physics_process(delta: float) -> void:
 
@@ -32,7 +33,12 @@ func _physics_process(delta: float) -> void:
 		_attack()
 		move_and_slide()
 		_animation_played()
-	
+
+func start():
+	set_physics_process(true)
+
+func pause():
+	set_physics_process(false)
 
 func _setGravity(delta: float):
 	if not is_on_floor():
