@@ -14,9 +14,12 @@ func _process(_delta: float) -> void:
 	#$VBoxContainer/HealthBar.max_value = maxHealth
 	#$VBoxContainer/HealthBar.value = maxHealth
 
-func updateHealth():
-	$Hearts.get_child(currentHeart).play("empty")
-	currentHeart -= 1
+func updateHealth(hp):
+	if(hp > 0):
+		$Hearts.get_child(currentHeart).play("empty")
+	else:
+		$Hearts.get_child(currentHeart).stop()
+	currentHeart -= hp
 	if currentHeart >= 0:
 		$Hearts.get_child(currentHeart).play("heart")
 

@@ -4,6 +4,7 @@ const OFFSET_CAMERA_PLAYER = 30
 
 var currentLevel: int = 1
 var level: Node2D
+var lateLevel: Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,7 +13,6 @@ func _ready() -> void:
 	level.connect("nextLevel", Callable(self, "nextLevel"))
 	$Player.position = level.get_node("PlayerStartPos").position
 	add_child(level)
-	
 	$Transition.connect("anim_transition_finished", Callable(self, "_on_transition_finished"))
 
 
@@ -44,16 +44,19 @@ func cameraMovement():
 			
 
 func transitionLevel(levelName):
-	#get_tree().paused = true
 	$Transition.get_child(0).get_child(1).text = levelName
 	$Transition.get_child(0).play("Level_Fade_In")
 
 func nextLevel():
 	currentLevel += 1
-
+	lateLevel = level
 	print(level)
-	level.queue_free()
 	level = Levels.loadScene(currentLevel)
 	transitionLevel(level.name)
+	$LoadingTimer.start()
+
+
+func _on_loading_timer_timeout() -> void:
+	lateLevel.queue_free()
 	$Player.position = level.get_node("PlayerStartPos").position
 	call_deferred("add_child", level)
