@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cixuio0nuxh2n"]
+[gd_scene load_steps=21 format=3 uid="uid://cixuio0nuxh2n"]
 
 [ext_resource type="Script" uid="uid://mwhuo8er64iu" path="res://Scripts/enemy.gd" id="1_1f0kj"]
 [ext_resource type="Texture2D" uid="uid://bnbtoov5h13m3" path="res://Animations/enemies/slime_purple.png" id="1_7k104"]
@@ -127,9 +127,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1f0kj"]
-size = Vector2(180, 14)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_afpow"]
 size = Vector2(16, 15)
 
@@ -149,13 +146,6 @@ shape = SubResource("RectangleShape2D_4gyqm")
 sprite_frames = SubResource("SpriteFrames_5hcft")
 animation = &"attack"
 autoplay = "move"
-
-[node name="DetectionZone" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="ColliderDetectionZone" type="CollisionShape2D" parent="DetectionZone"]
-position = Vector2(0, 5)
-shape = SubResource("RectangleShape2D_1f0kj")
 
 [node name="AttackZone" type="Area2D" parent="."]
 collision_layer = 0
@@ -190,8 +180,12 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftFootZone"]
 shape = SubResource("CircleShape2D_1f0kj")
 
-[connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
-[connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]
+[node name="DetectionRayCast" type="RayCast2D" parent="."]
+position = Vector2(0, 5)
+target_position = Vector2(90, 0)
+collision_mask = 7
+collide_with_areas = true
+
 [connection signal="body_entered" from="AttackZone" to="." method="_on_attack_zone_body_entered"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="HitTimer" to="." method="_on_hit_timer_timeout"]
