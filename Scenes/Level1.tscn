@@ -34,13 +34,13 @@ tile_set = ExtResource("1_q12u6")
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Enemy" parent="Enemies" instance=ExtResource("2_joc8x")]
-position = Vector2(-14, -14)
+position = Vector2(-13, -7)
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource("2_joc8x")]
-position = Vector2(136, -12)
+position = Vector2(136, -7)
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource("2_joc8x")]
-position = Vector2(-166, -77)
+position = Vector2(-166, -71)
 
 [node name="PlayerStartPos" type="Marker2D" parent="."]
 position = Vector2(41, -77)
@@ -53,7 +53,10 @@ position = Vector2(32, -215)
 shape = SubResource("RectangleShape2D_q12u6")
 
 [node name="KillZone" parent="." instance=ExtResource("4_jghel")]
+visible = false
 position = Vector2(253, 87)
 scale = Vector2(6.1199975, 1)
+collision_layer = 0
+collision_mask = 5
 
 [connection signal="body_entered" from="NextLevelZone" to="." method="_on_next_level_zone_body_entered"]
