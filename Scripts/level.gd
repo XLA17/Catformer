@@ -13,6 +13,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_next_level_zone_body_entered(_body: Node2D) -> void:
+	print("Next level")
 	emit_signal("nextLevel")
 
 func startLevel():

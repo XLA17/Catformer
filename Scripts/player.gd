@@ -4,7 +4,8 @@ extends CharacterBody2D
 const SPEED = 200.0
 const ACCELERATION = 1000.0
 const FRICTION = 2000.0
-const JUMP_VELOCITY = -300.0
+const JUMP_VELOCITY = -325.0
+const JUMP_MAX = 0.5
 const DASH_SPEED = 600.0
 const MAX_HEALTH = 9
 const DAMAGE_DEALT = 2
@@ -60,8 +61,13 @@ func _move(delta: float):
 func _jump():
 	if isDashing:
 		return
+	# Saut initial
 	if Input.is_action_just_pressed("ui_accept") and (is_on_floor() or floatingTime <= 0.1):
 		velocity.y = JUMP_VELOCITY
+
+	# Saut variable : couper le saut quand on relâche la touche
+	if Input.is_action_just_released("ui_accept") and velocity.y < 0:
+		velocity.y *= JUMP_MAX
 
 
 func _dash():

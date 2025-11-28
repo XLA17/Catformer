@@ -53,6 +53,7 @@ func nextLevel():
 	lateLevel = level
 	print(level)
 	level = Levels.loadScene(currentLevel)
+	level.connect("nextLevel", Callable(self, "nextLevel"))
 	transitionLevel(level.name)
 	$LoadingTimer.start()
 	$Player.pause()
@@ -62,3 +63,4 @@ func _on_loading_timer_timeout() -> void:
 	lateLevel.queue_free()
 	$Player.position = level.get_node("PlayerStartPos").position
 	call_deferred("add_child", level)
+	

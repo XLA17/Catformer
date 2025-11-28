@@ -25,6 +25,12 @@ z_index = -100
 position = Vector2(576, 0)
 texture = ExtResource("2_slnnj")
 
+[node name="Orig" type="Sprite2D" parent="Orig/Orig"]
+show_behind_parent = true
+z_index = -100
+position = Vector2(-249, 87)
+texture = ExtResource("2_slnnj")
+
 [node name="Flag" parent="." instance=ExtResource("3_t3or0")]
 position = Vector2(34, -221)
 
