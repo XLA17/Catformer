@@ -110,6 +110,5 @@ func _on_hit_timer_timeout() -> void:
 	isTakingDamage = false
 
 
-func _on_foot_zone_area_exited(area: Area2D) -> void:
-	print("test")
+func _on_foot_zone_body_exited(body: Node2D) -> void:
 	changeDirection()
