@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://bf3rcbi37rgem"]
+
+[ext_resource type="Texture2D" uid="uid://db01qx8ccdgi3" path="res://Animations/Fish.png" id="1_15fnf"]
+[ext_resource type="Script" uid="uid://ci3s2k6we6013" path="res://Scripts/fish.gd" id="1_two43"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_two43"]
+atlas = ExtResource("1_15fnf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bce5k"]
+atlas = ExtResource("1_15fnf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtied"]
+atlas = ExtResource("1_15fnf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bdn1d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_two43")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bce5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtied")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_15fnf"]
+radius = 7.0
+
+[node name="Fish" type="Node2D"]
+script = ExtResource("1_two43")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bdn1d")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.62455046
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_15fnf")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

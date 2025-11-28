@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://dk7xop0gabpex"]
+[gd_scene load_steps=9 format=4 uid="uid://dk7xop0gabpex"]
 
 [ext_resource type="Script" uid="uid://c4xejq8td62np" path="res://Scripts/level.gd" id="1_joc8x"]
 [ext_resource type="TileSet" uid="uid://tioqn3njagtc" path="res://Tileset/level_tileset.tres" id="1_q12u6"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ws54npur6386" path="res://Background/background 2/orig.png" id="2_slnnj"]
 [ext_resource type="PackedScene" uid="uid://cewt2iokb5u0g" path="res://Scenes/flag.tscn" id="3_t3or0"]
 [ext_resource type="PackedScene" uid="uid://dva82y3mtesif" path="res://Scenes/kill_zone.tscn" id="4_jghel"]
+[ext_resource type="PackedScene" uid="uid://bf3rcbi37rgem" path="res://Scenes/Fish.tscn" id="7_ysn8j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q12u6"]
 
@@ -58,5 +59,11 @@ position = Vector2(253, 87)
 scale = Vector2(6.1199975, 1)
 collision_layer = 0
 collision_mask = 5
+
+[node name="Fish" parent="." instance=ExtResource("7_ysn8j")]
+position = Vector2(-47, -103)
+
+[node name="Fish2" parent="." instance=ExtResource("7_ysn8j")]
+position = Vector2(96, -137)
 
 [connection signal="body_entered" from="NextLevelZone" to="." method="_on_next_level_zone_body_entered"]

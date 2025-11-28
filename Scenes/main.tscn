@@ -14,3 +14,9 @@ position = Vector2(43, 37)
 zoom = Vector2(3, 3)
 
 [node name="Transition" parent="." instance=ExtResource("4_jjvhh")]
+
+[node name="LoadingTimer" type="Timer" parent="."]
+one_shot = true
+ignore_time_scale = true
+
+[connection signal="timeout" from="LoadingTimer" to="." method="_on_loading_timer_timeout"]

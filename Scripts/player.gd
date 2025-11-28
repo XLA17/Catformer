@@ -98,9 +98,18 @@ func takeDamage():
 	isTakingDamage = true
 	health -= 1
 	$InvulnerabilityTimer.start()
-	Ui.updateHealth()
+	Ui.updateHealth(1)
 	if health <= 0:
 		death()
+
+func takeHeal(item):
+	if health >=9:
+		return
+	print("Player healed")
+	health += 1
+	Ui.updateHealth(-1)
+	item.queue_free()
+	
 
 func death():
 	health = 0

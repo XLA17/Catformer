@@ -86,7 +86,6 @@ position = Vector2(299.99997, 0)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_ryf15")
 animation = &"heart"
-frame_progress = 0.23307334
 
 [node name="Heart7" type="AnimatedSprite2D" parent="Hearts"]
 position = Vector2(359.99997, 0)
