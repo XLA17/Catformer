@@ -20,12 +20,15 @@ func _ready() -> void:
 	health = MAX_HEALTH
 	velocity.x = SPEED
 	set_physics_process(false)
+	$Animation.connect("animation_finished", Callable(self, "_on_animation_finished"))
 	
 func _physics_process(delta: float) -> void:
 	_setGravity(delta)
-	_move()
-	_detection()
 	
+	if !isDead:
+		_move()
+		#_detection()
+
 func start():
 	set_physics_process(true)
 	pass
@@ -34,16 +37,16 @@ func _setGravity(delta: float):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-func _detection(): # ne sert actuellement à rien 
-	var rc = $DetectionRayCast
-	if rc.is_colliding():
-		var collider = rc.get_collider()
-		if collider.get_parent().has_method("_dash"):
-			_target = collider.get_parent()
-		else:
-			_target = null
-	else:
-		_target = null
+#func _detection(): # ne sert actuellement à rien 
+	#var rc = $DetectionRayCast
+	#if rc.is_colliding():
+		#var collider = rc.get_collider()
+		#if collider.get_parent().has_method("_dash"):
+			#_target = collider.get_parent()
+		#else:
+			#_target = null
+	#else:
+		#_target = null
 
 func _move():
 	velocity.x = SPEED * direction
@@ -71,7 +74,11 @@ func takeDamage(damage: int):
 	if health <= 0:
 		isDead = true
 		playSound(deathSound)
-		$DeathTimer.start()
+		$Animation.play("death")
+		$AttackZone/ColliderAttackZone.disabled = true
+		$Collider.disabled = true
+		$RightFootZone/CollisionShape2D.disabled = true
+		$LeftFootZone/CollisionShape2D.disabled = true
 
 func playSound(sound):
 	$Audio.stream = sound
@@ -115,8 +122,8 @@ func _on_attack_timer_timeout() -> void:
 			_attack(body)
 
 
-func _on_death_timer_timeout() -> void:
-	queue_free()
+#func _on_death_timer_timeout() -> void:
+	#queue_free()
 
 
 func _on_hit_timer_timeout() -> void:
@@ -125,3 +132,7 @@ func _on_hit_timer_timeout() -> void:
 
 func _on_foot_zone_body_exited(body: Node2D) -> void:
 	changeDirection()
+
+func _on_animation_finished():
+	if $Animation.animation == "death":
+		queue_free()

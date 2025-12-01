@@ -74,7 +74,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_287tu")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 5.0
 }, {
@@ -88,7 +88,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1dp5w")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 5.0
 }, {
@@ -181,6 +181,7 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_1f0kj")
 
 [node name="DetectionRayCast" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(0, 5)
 target_position = Vector2(90, 0)
 collision_mask = 7
