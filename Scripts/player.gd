@@ -53,7 +53,11 @@ func _move(delta: float):
 		return
 	
 	var input = Input.get_axis("move_left", "move_right")
-	if input:
+	if input != 0:
+		# Si on va dans l'autre direction que la vitesse actuelle : reset du X
+		if sign(velocity.x) != sign(input):
+			velocity.x = 0
+
 		velocity = velocity.move_toward(Vector2(input * SPEED, velocity.y), delta * ACCELERATION)
 	else:
 		velocity = velocity.move_toward(Vector2(0, velocity.y), delta * FRICTION)
