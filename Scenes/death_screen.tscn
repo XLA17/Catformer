@@ -1,0 +1,102 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbu07w1505t57"]
+
+[ext_resource type="Texture2D" uid="uid://dx8rx8rab5nj4" path="res://Assets/Ui/free.png" id="1_8hps1"]
+[ext_resource type="Script" uid="uid://be2fdw2q83gb2" path="res://Scripts/death_screen.gd" id="1_rwas2"]
+
+[sub_resource type="Gradient" id="Gradient_rwas2"]
+colors = PackedColorArray(0, 0, 0, 0.78431374, 0, 0, 0, 0.09803922)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tseak"]
+gradient = SubResource("Gradient_rwas2")
+fill_from = Vector2(0.491453, 0)
+fill_to = Vector2(0.508547, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amiou"]
+atlas = ExtResource("1_8hps1")
+region = Rect2(2, 1, 24, 28)
+
+[node name="DeathScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rwas2")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_tseak")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -145.0
+offset_top = -188.99998
+offset_right = -121.0
+offset_bottom = -160.99998
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(12.093589, 12.093589)
+texture = SubResource("AtlasTexture_amiou")
+
+[node name="Restart" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -29.0
+offset_right = 67.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "Restart"
+
+[node name="Menu" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = 47.0
+offset_right = 67.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "Menu"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -105.0
+offset_right = 95.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.54901963, 0, 0, 1)
+theme_override_font_sizes/font_size = 45
+text = "You died"
+
+[connection signal="button_down" from="Restart" to="." method="_on_restart_button_down"]
+[connection signal="button_down" from="Menu" to="." method="_on_menu_button_down"]
