@@ -38,6 +38,7 @@ animations = [{
 }]
 
 [node name="ui" type="CanvasLayer"]
+visible = false
 script = ExtResource("1_jxero")
 
 [node name="Hearts" type="HBoxContainer" parent="."]

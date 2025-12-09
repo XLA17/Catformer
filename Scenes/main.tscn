@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkkgnbnejira1"]
+[gd_scene load_steps=4 format=3 uid="uid://bkkgnbnejira1"]
 
 [ext_resource type="Script" uid="uid://bxnd3hlevhi8x" path="res://Scripts/main.gd" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dmkkqwuh3bgjq" path="res://Scenes/player.tscn" id="3_kry3j"]
 [ext_resource type="PackedScene" uid="uid://b8s6ggpvfc01m" path="res://Scenes/transition.tscn" id="4_jjvhh"]
-[ext_resource type="PackedScene" uid="uid://yesoittcv1l7" path="res://Scenes/main_menu.tscn" id="4_kry3j"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_8gbba")
@@ -19,7 +18,5 @@ zoom = Vector2(3, 3)
 [node name="LoadingTimer" type="Timer" parent="."]
 one_shot = true
 ignore_time_scale = true
-
-[node name="MainMenu" parent="." instance=ExtResource("4_kry3j")]
 
 [connection signal="timeout" from="LoadingTimer" to="." method="_on_loading_timer_timeout"]

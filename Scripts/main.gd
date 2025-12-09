@@ -13,6 +13,7 @@ func _ready() -> void:
 	level.connect("nextLevel", Callable(self, "nextLevel"))
 	$Player.position = level.get_node("PlayerStartPos").position
 	add_child(level)
+	Ui.visible = true
 	$Transition.connect("anim_transition_finished", Callable(self, "_on_transition_finished"))
 
 
