@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://c4xejq8td62np" path="res://Scripts/level.gd" id="1_y6vx4"]
 [ext_resource type="TileSet" uid="uid://tioqn3njagtc" path="res://Tileset/level_tileset.tres" id="2_7tk33"]
 [ext_resource type="PackedScene" uid="uid://cixuio0nuxh2n" path="res://Scenes/enemy.tscn" id="3_44apn"]
-[ext_resource type="Texture2D" uid="uid://ws54npur6386" path="res://Background/background 2/orig.png" id="4_7tk33"]
 [ext_resource type="PackedScene" uid="uid://dva82y3mtesif" path="res://Scenes/kill_zone.tscn" id="5_43mlh"]
 [ext_resource type="PackedScene" uid="uid://cewt2iokb5u0g" path="res://Scenes/flag.tscn" id="6_cp0jt"]
 [ext_resource type="PackedScene" uid="uid://bf3rcbi37rgem" path="res://Scenes/Fish.tscn" id="7_p6pjf"]
+[ext_resource type="PackedScene" uid="uid://b5gxiu4hkoi0" path="res://Scenes/background.tscn" id="8_cp0jt"]
 
 [node name="Level3" type="Node2D"]
 script = ExtResource("1_y6vx4")
@@ -38,24 +38,6 @@ position = Vector2(566, -74)
 [node name="PlayerStartPos" type="Marker2D" parent="."]
 position = Vector2(-276, -41)
 
-[node name="Orig" type="Sprite2D" parent="."]
-show_behind_parent = true
-z_index = -100
-position = Vector2(-15, -86)
-texture = ExtResource("4_7tk33")
-
-[node name="Orig" type="Sprite2D" parent="Orig"]
-show_behind_parent = true
-z_index = -100
-position = Vector2(576, 0)
-texture = ExtResource("4_7tk33")
-
-[node name="Orig" type="Sprite2D" parent="Orig/Orig"]
-show_behind_parent = true
-z_index = -100
-position = Vector2(27, 88)
-texture = ExtResource("4_7tk33")
-
 [node name="Flag" parent="." instance=ExtResource("6_cp0jt")]
 position = Vector2(822, -76)
 
@@ -71,3 +53,5 @@ position = Vector2(241, -25)
 [node name="KillZone" parent="." instance=ExtResource("5_43mlh")]
 position = Vector2(800, 154)
 scale = Vector2(5.3890347, 1.3395736)
+
+[node name="Background" parent="." instance=ExtResource("8_cp0jt")]
