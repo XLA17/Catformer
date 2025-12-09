@@ -129,6 +129,7 @@ func death():
 	set_physics_process(false)
 	$Collider.queue_free()
 	Ui.emptyHealth()
+	Ui.deathVisibility(true)
 
 func playSound(sound):
 	$Audio.stream = sound

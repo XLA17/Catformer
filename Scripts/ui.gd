@@ -26,3 +26,12 @@ func updateHealth(hp):
 func emptyHealth():
 	for heart in $Hearts.get_children():
 		heart.play("empty")
+		
+func heartsVisibility(visibility):
+	$Hearts.visible = visibility
+	
+func winVisibility(visibility):
+	$win_screen.visible = visibility
+	
+func deathVisibility(visibility):
+	$DeathScreen.visible = visibility

@@ -13,8 +13,9 @@ func _ready() -> void:
 	level.connect("nextLevel", Callable(self, "nextLevel"))
 	$Player.position = level.get_node("PlayerStartPos").position
 	add_child(level)
-	Ui.visible = true
+	Ui.heartsVisibility(true)
 	$Transition.connect("anim_transition_finished", Callable(self, "_on_transition_finished"))
+	print(Ui.has_node("DeathScreen")) #DeathScreen.connect("restartLevel", Callable(self,"restartLevel"))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -58,6 +59,7 @@ func nextLevel():
 	transitionLevel(level.name)
 	$LoadingTimer.start()
 	$Player.pause()
+
 
 
 func _on_loading_timer_timeout() -> void:
