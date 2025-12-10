@@ -1,6 +1,5 @@
 extends Control
 
-
 @onready var level = preload("res://Scenes/main.tscn")
 
 
@@ -13,3 +12,7 @@ func _ready() -> void:
 func _on_button_clicked(number):
 	Globals.levelNumber = number
 	get_tree().change_scene_to_packed(level)
+
+
+func _on_back_pressed() -> void:
+	get_tree().change_scene_to_packed(load("res://Scenes/main_menu.tscn"))

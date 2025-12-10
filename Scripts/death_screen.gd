@@ -1,6 +1,6 @@
 extends Control
 
-@onready var menuLevel = preload("res://Scenes/main_menu.tscn")
+@onready var menuLevel = preload("res://Scenes/levels_menu.tscn")
 signal restartLevel
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

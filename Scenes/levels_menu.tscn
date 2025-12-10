@@ -1,8 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://dcecleijgoolv"]
+[gd_scene load_steps=9 format=3 uid="uid://dcecleijgoolv"]
 
 [ext_resource type="Texture2D" uid="uid://bnaucsm4sop7q" path="res://Background/background 4/orig_big.png" id="1_7de7r"]
 [ext_resource type="Script" uid="uid://cvdgjcdlv3fy7" path="res://Scripts/levels_menu.gd" id="1_u5661"]
 [ext_resource type="PackedScene" uid="uid://cycauduukm4i2" path="res://Scenes/level_ui.tscn" id="2_u5661"]
+[ext_resource type="Texture2D" uid="uid://bhss2tt512gft" path="res://Assets/Ui/sheet.png" id="4_2dfs2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ce3w2"]
+atlas = ExtResource("4_2dfs2")
+region = Rect2(198, 44, 48, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_66qni"]
+texture = SubResource("AtlasTexture_ce3w2")
+expand_margin_left = 20.0
+expand_margin_right = 20.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ehe0"]
+atlas = ExtResource("4_2dfs2")
+region = Rect2(198, 44, 48, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gqcn8"]
+texture = SubResource("AtlasTexture_1ehe0")
+expand_margin_left = 10.0
+expand_margin_top = 5.0
+expand_margin_right = 10.0
+expand_margin_bottom = 5.0
 
 [node name="LevelsMenu" type="Control"]
 layout_mode = 3
@@ -70,3 +92,18 @@ metadata/_edit_group_ = true
 layout_mode = 2
 number = 5
 metadata/_edit_group_ = true
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 32.0
+offset_right = 141.26086
+offset_bottom = 87.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxTexture_66qni")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_gqcn8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_66qni")
+text = "Back"
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
