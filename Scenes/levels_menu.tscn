@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcecleijgoolv"]
+
+[ext_resource type="Texture2D" uid="uid://bnaucsm4sop7q" path="res://Background/background 4/orig_big.png" id="1_7de7r"]
+[ext_resource type="PackedScene" uid="uid://cycauduukm4i2" path="res://Scenes/level_ui.tscn" id="2_u5661"]
+
+[node name="LevelsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OrigBig" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(576, 324)
+scale = Vector2(0.49999994, 0.49999994)
+texture = ExtResource("1_7de7r")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 56.0
+offset_right = 724.0
+offset_bottom = 193.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 100
+text = "Levels"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 200.0
+offset_top = 263.99997
+offset_right = 2928.0
+offset_bottom = 296.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+theme_override_constants/separation = 800
+metadata/_edit_group_ = true
+
+[node name="LevelUI" parent="HBoxContainer" instance=ExtResource("2_u5661")]
+layout_mode = 2
+number = 1
+metadata/_edit_group_ = true
+
+[node name="LevelUI2" parent="HBoxContainer" instance=ExtResource("2_u5661")]
+layout_mode = 2
+number = 2
+metadata/_edit_group_ = true
+
+[node name="LevelUI3" parent="HBoxContainer" instance=ExtResource("2_u5661")]
+layout_mode = 2
+number = 3
+metadata/_edit_group_ = true
+
+[node name="LevelUI4" parent="HBoxContainer" instance=ExtResource("2_u5661")]
+layout_mode = 2
+number = 4
+metadata/_edit_group_ = true
+
+[node name="LevelUI5" parent="HBoxContainer" instance=ExtResource("2_u5661")]
+layout_mode = 2
+number = 5
+metadata/_edit_group_ = true

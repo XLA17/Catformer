@@ -1,0 +1,201 @@
+[gd_scene load_steps=10 format=3 uid="uid://cycauduukm4i2"]
+
+[ext_resource type="Script" uid="uid://bxchktj4lqx7p" path="res://Scripts/level_ui.gd" id="1_awnb2"]
+[ext_resource type="Texture2D" uid="uid://b8quou0v8118u" path="res://Background/background 1/orig_big.png" id="1_ktgpk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ktgpk"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Shader" id="Shader_awnb2"]
+code = "shader_type canvas_item;
+
+uniform float corner_radius = 120;
+
+bool in_rect(vec2 uv,vec2 orign,vec2 end)
+{
+  return all(lessThan(uv,end))&&all( greaterThan(uv,orign));
+}
+
+bool is_hid(vec2 uv,vec2 size,float radius)
+{
+  vec2 center = vec2(size.x*0.5,size.y*0.5);
+  vec2 a = vec2(radius,radius);
+  vec2 b = vec2(size.x-radius,size.y-radius);
+	
+  vec2 c = vec2(size.x-radius,radius);
+  vec2 d = vec2(radius,size.y-radius);
+	
+  vec2 rd_origin = vec2(size.x - radius,0);
+  vec2 rd_end = vec2(size.x,radius);
+	
+  vec2 lu_origin = vec2(0,size.y - radius);
+  vec2 lu_end = vec2(radius,size.y);
+	
+	
+  if(!in_rect(uv,a,b))
+  {
+    float dis = radius - 1.f;
+    if(in_rect(uv,vec2(0.f),a))
+    {
+      dis = distance(a,uv);
+    }
+    if(in_rect(uv,b,size))
+    {
+      dis = distance(b,uv);
+    }
+    if(in_rect(uv,rd_origin,rd_end))
+    {			
+      dis = distance(c,uv);
+    }
+    if(in_rect(uv,lu_origin,lu_end))
+    {
+      dis = distance(d,uv);
+    }
+    return dis > radius;		
+  }
+  return false;
+}
+
+
+void fragment() 
+{
+  float pixel_size_x = 1.0 / TEXTURE_PIXEL_SIZE.x;
+  float pixel_size_y = 1.0 / TEXTURE_PIXEL_SIZE.y;
+  float max_r = min(pixel_size_x,pixel_size_y) / 2.f;
+
+if(is_hid(vec2(UV.x*pixel_size_x,UV.y*pixel_size_y),vec2(pixel_size_x,pixel_size_y),min(corner_radius,max_r)))  
+  {
+    COLOR = vec4(0.0);
+  }
+  else 
+  {
+    COLOR = texture(TEXTURE,UV);
+  }
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_41gx8"]
+shader = SubResource("Shader_awnb2")
+shader_parameter/corner_radius = 20.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awnb2"]
+atlas = ExtResource("1_ktgpk")
+region = Rect2(504, 0, 1296, 1296)
+
+[sub_resource type="Animation" id="Animation_awnb2"]
+resource_name = "hover_level_button"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1.05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-14.6, -14.6)]
+}
+
+[sub_resource type="Animation" id="Animation_41gx8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eu2e1"]
+_data = {
+&"RESET": SubResource("Animation_41gx8"),
+&"hover_level_button": SubResource("Animation_awnb2")
+}
+
+[node name="LevelUI" type="Control"]
+layout_mode = 3
+anchor_right = 0.57600003
+anchor_bottom = 1.0250001
+offset_right = 0.447937
+offset_bottom = -0.20007324
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_awnb2")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 727.2727
+offset_bottom = 727.2727
+theme_override_styles/panel = SubResource("StyleBoxFlat_ktgpk")
+
+[node name="TextureButton" type="TextureButton" parent="Panel"]
+material = SubResource("ShaderMaterial_41gx8")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 576.7273
+offset_bottom = 576.7273
+scale = Vector2(0.55, 0.55)
+texture_normal = SubResource("AtlasTexture_awnb2")
+
+[node name="Label" type="Label" parent="Panel/TextureButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -273.0
+offset_right = 114.0
+offset_bottom = 273.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 400
+text = "1"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_eu2e1")
+}
+
+[connection signal="mouse_entered" from="Panel" to="." method="_on_panel_mouse_entered"]
+[connection signal="mouse_exited" from="Panel" to="." method="_on_panel_mouse_exited"]
+[connection signal="mouse_entered" from="Panel/TextureButton" to="." method="_on_texture_button_mouse_entered"]
+[connection signal="mouse_exited" from="Panel/TextureButton" to="." method="_on_texture_button_mouse_exited"]
