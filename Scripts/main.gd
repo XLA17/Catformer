@@ -2,13 +2,12 @@ extends Node2D
 
 const OFFSET_CAMERA_PLAYER = 30
 
-var currentLevel: int = 1
 var level: Node2D
 var lateLevel: Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	level = Levels.loadScene(currentLevel)
+	level = Levels.loadScene(Globals.levelNumber)
 	transitionLevel(level.name)
 	level.connect("nextLevel", Callable(self, "nextLevel"))
 	$Player.position = level.get_node("PlayerStartPos").position
@@ -52,15 +51,14 @@ func transitionLevel(levelName):
 	$Transition.get_child(0).play("Level_Fade_In")
 
 func nextLevel():
-	currentLevel += 1
+	Globals.levelNumber += 1
 	lateLevel = level
 	print(level)
-	level = Levels.loadScene(currentLevel)
+	level = Levels.loadScene(Globals.levelNumber)
 	level.connect("nextLevel", Callable(self, "nextLevel"))
 	transitionLevel(level.name)
 	$LoadingTimer.start()
 	$Player.pause()
-
 
 
 func _on_loading_timer_timeout() -> void:
@@ -73,7 +71,7 @@ func _on_loading_timer_timeout() -> void:
 func restartLevel() -> void:
 	lateLevel = level
 	print(level)
-	level = Levels.loadScene(currentLevel)
+	level = Levels.loadScene(Globals.levelNumber)
 	level.connect("nextLevel", Callable(self, "nextLevel"))
 	transitionLevel(level.name)
 	$LoadingTimer.start()

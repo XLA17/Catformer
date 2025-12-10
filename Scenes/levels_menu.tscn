@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcecleijgoolv"]
+[gd_scene load_steps=4 format=3 uid="uid://dcecleijgoolv"]
 
 [ext_resource type="Texture2D" uid="uid://bnaucsm4sop7q" path="res://Background/background 4/orig_big.png" id="1_7de7r"]
+[ext_resource type="Script" uid="uid://cvdgjcdlv3fy7" path="res://Scripts/levels_menu.gd" id="1_u5661"]
 [ext_resource type="PackedScene" uid="uid://cycauduukm4i2" path="res://Scenes/level_ui.tscn" id="2_u5661"]
 
 [node name="LevelsMenu" type="Control"]
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_u5661")
 
 [node name="OrigBig" type="Sprite2D" parent="."]
 z_index = -10

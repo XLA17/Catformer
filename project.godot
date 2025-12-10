@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Ui="*res://Scenes/ui.tscn"
 Levels="*res://Scenes/levels.tscn"
+Globals="*res://Scripts/globals.gd"
 
 [input]
 
