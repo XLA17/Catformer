@@ -111,6 +111,7 @@ func takeDamage():
 	print("Player take damage")
 	$Animation.play("Take_Damage")
 	isTakingDamage = true
+	set_physics_process(false)
 	health -= 1
 	$InvulnerabilityTimer.start()
 	Ui.updateHealth(1)
@@ -181,3 +182,4 @@ func _on_attack_timer_timeout() -> void:
 
 func _on_invulnerability_timer_timeout() -> void:
 	isTakingDamage = false
+	set_physics_process(true)

@@ -67,7 +67,7 @@ func _on_loading_timer_timeout() -> void:
 	lateLevel.queue_free()
 	$Player.position = level.get_node("PlayerStartPos").position
 	call_deferred("add_child", level)
-	$Player.get_node("Collider").disabled = false
+	#$Player.get_node("Collider").disabled = false
 
 
 func restartLevel() -> void:
