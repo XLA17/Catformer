@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dt3w3vko3xi8e"]
+[gd_scene load_steps=9 format=3 uid="uid://dt3w3vko3xi8e"]
 
 [ext_resource type="Script" uid="uid://bqwwtom0cowas" path="res://Scripts/win_screen.gd" id="1_a00f1"]
 [ext_resource type="Texture2D" uid="uid://dx8rx8rab5nj4" path="res://Assets/Ui/free.png" id="2_awi1s"]
+[ext_resource type="Texture2D" uid="uid://bhss2tt512gft" path="res://Assets/Ui/sheet.png" id="3_awi1s"]
 
 [sub_resource type="Gradient" id="Gradient_rwas2"]
 colors = PackedColorArray(0, 0, 0, 0.78431374, 0, 0, 0, 0.09803922)
@@ -14,6 +15,17 @@ fill_to = Vector2(0.508547, 1)
 [sub_resource type="AtlasTexture" id="AtlasTexture_85imr"]
 atlas = ExtResource("2_awi1s")
 region = Rect2(2, 1, 24, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mf36t"]
+atlas = ExtResource("3_awi1s")
+region = Rect2(1, 82, 45, 13)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pq638"]
+texture = SubResource("AtlasTexture_mf36t")
+expand_margin_left = 10.0
+expand_margin_top = 5.0
+expand_margin_right = 10.0
+expand_margin_bottom = 5.0
 
 [node name="win_screen" type="Control"]
 layout_mode = 3
@@ -63,6 +75,9 @@ offset_bottom = 103.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxTexture_pq638")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_pq638")
+theme_override_styles/hover = SubResource("StyleBoxTexture_pq638")
 text = "Quit"
 
 [node name="Menu" type="Button" parent="."]
@@ -79,6 +94,9 @@ offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxTexture_pq638")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_pq638")
+theme_override_styles/hover = SubResource("StyleBoxTexture_pq638")
 text = "Menu"
 
 [node name="Label" type="Label" parent="."]

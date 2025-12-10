@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 const SPEED = 200.0
 const ACCELERATION = 1000.0
 const FRICTION = 2000.0
@@ -37,9 +36,15 @@ func _physics_process(delta: float) -> void:
 
 func start():
 	set_physics_process(true)
+	$Animation.play("Idle")
+	isDead = false
+	$Collider.disabled = false
+	health = MAX_HEALTH
+	Ui.setHealth(health-1)
 
 func pause():
 	set_physics_process(false)
+	$Collider.disabled = true
 
 func _setGravity(delta: float):
 	if not is_on_floor():
@@ -126,8 +131,7 @@ func death():
 	isDead = true
 	playSound(deathSound)
 	$Animation.play("Death")
-	set_physics_process(false)
-	$Collider.queue_free()
+	pause()
 	Ui.emptyHealth()
 	Ui.deathVisibility(true)
 

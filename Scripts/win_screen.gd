@@ -20,4 +20,5 @@ func _on_quit_button_down() -> void:
 
 func _on_menu_button_down() -> void:
 	Ui.winVisibility(false)
+	Ui.heartsVisibility(false)
 	get_tree().change_scene_to_packed(menuLevel)

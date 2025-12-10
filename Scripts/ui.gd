@@ -23,6 +23,19 @@ func updateHealth(hp):
 	if currentHeart >= 0:
 		$Hearts.get_child(currentHeart).play("heart")
 
+func setHealth(hp):
+	currentHeart = hp
+	var hearts = $Hearts.get_child_count()
+	for i in range(hearts):
+		var heart = $Hearts.get_child(i)
+		if i < currentHeart:
+			heart.play("heart")
+			heart.stop()
+		elif i == currentHeart:
+			heart.play("heart")
+		else:
+			heart.play("empty")
+
 func emptyHealth():
 	for heart in $Hearts.get_children():
 		heart.play("empty")

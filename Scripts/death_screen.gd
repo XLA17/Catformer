@@ -19,4 +19,5 @@ func _on_restart_button_down() -> void:
 
 func _on_menu_button_down() -> void:
 	Ui.deathVisibility(false)
+	Ui.heartsVisibility(false)
 	get_tree().change_scene_to_packed(menuLevel)
