@@ -1,6 +1,6 @@
 extends Control
 
-@onready var level = preload("res://Scenes/main.tscn")
+@onready var level = preload("res://Scene s/main.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
