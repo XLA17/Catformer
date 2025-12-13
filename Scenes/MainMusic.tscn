@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://6ehe4pbg1xqg"]
+
+[ext_resource type="AudioStream" uid="uid://cr3vgwrdahna1" path="res://Sound/A Journey Awaits.mp3" id="1_21lov"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_21lov")
+autoplay = true
+parameters/looping = true
