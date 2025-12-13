@@ -55,7 +55,7 @@ func nextLevel():
 	lateLevel = level
 	print(level)
 	level = Levels.loadScene(Globals.levelNumber)
- 	level.connect("nextLevel", Callable(self, "nextLevel"))
+	level.connect("nextLevel", Callable(self, "nextLevel"))
 	transitionLevel(level.name)
 	$LoadingTimer.start()
 	$Player.pause()
