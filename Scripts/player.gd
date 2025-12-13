@@ -5,7 +5,7 @@ const ACCELERATION = 1000.0
 const FRICTION = 2000.0
 const JUMP_VELOCITY = -350.0
 const JUMP_MAX = 0.5
-const DASH_SPEED = 600.0
+const DASH_SPEED = 400.0
 const MAX_HEALTH = 9
 const DAMAGE_DEALT = 2
 
@@ -172,7 +172,6 @@ func _animation_played():
 
 
 func _on_dash_timer_timeout() -> void:
-	velocity.x = 0.0
 	isDashing = false
 
 
