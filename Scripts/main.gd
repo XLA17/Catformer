@@ -8,7 +8,8 @@ var lateLevel: Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	level = Levels.loadScene(Globals.levelNumber)
-	transitionLevel(level.name)
+	$Transition.get_child(0).get_child(1).text = level.name
+	$Transition.get_child(0).play("New_Level_Fade")
 	level.connect("nextLevel", Callable(self, "nextLevel"))
 	$Player.position = level.get_node("PlayerStartPos").position
 	add_child(level)
@@ -48,7 +49,7 @@ func cameraMovement():
 
 func transitionLevel(levelName):
 	$Transition.get_child(0).get_child(1).text = levelName
-	$Transition.get_child(0).play("Level_Fade_In")
+	$Transition.get_child(0).play("Next_Level_Fade")
 
 func nextLevel():
 	Globals.levelNumber += 1

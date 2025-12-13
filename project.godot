@@ -22,6 +22,10 @@ Levels="*res://Scenes/levels.tscn"
 Globals="*res://Scripts/globals.gd"
 MainMusic="*res://Scenes/MainMusic.tscn"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [input]
 
 dash={

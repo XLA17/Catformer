@@ -2,17 +2,9 @@ extends CanvasLayer
 
 signal anim_transition_finished
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "Level_Fade_In":
+	if anim_name == "New_Level_Fade" or anim_name == "Next_Level_Fade":
 		emit_signal("anim_transition_finished")
-	pass # Replace with function body.
+		#await get_tree().create_timer(1.0).timeout
+		#$AnimationPlayer.play("Level_Fade_Out")
+	#elif anim_name == "Level_Fade_Out":
