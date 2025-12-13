@@ -130,7 +130,7 @@ func _on_hit_timer_timeout() -> void:
 	isTakingDamage = false
 
 
-func _on_foot_zone_body_exited(body: Node2D) -> void:
+func _on_foot_zone_body_exited(_body: Node2D) -> void:
 	changeDirection()
 
 func _on_animation_finished():

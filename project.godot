@@ -21,6 +21,10 @@ Ui="*res://Scenes/ui.tscn"
 Levels="*res://Scenes/levels.tscn"
 Globals="*res://Scripts/globals.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [input]
 
 dash={
