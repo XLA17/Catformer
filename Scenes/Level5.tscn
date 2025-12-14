@@ -11,7 +11,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n3cqh"]
 size = Vector2(8, 4)
 
-[node name="Level2" type="Node2D"]
+[node name="Level5" type="Node2D"]
 script = ExtResource("1_213sf")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
