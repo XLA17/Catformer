@@ -44,6 +44,7 @@ func start():
 
 func pause():
 	set_physics_process(false)
+	$Animation.play("Idle")
 	$Collider.disabled = true
 
 func _setGravity(delta: float):
