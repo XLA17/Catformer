@@ -5,6 +5,7 @@ const OFFSET_CAMERA_PLAYER = 30
 var level: Node2D
 var lateLevel: Node2D
 var gameIsPaused = false
+var canPause = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,20 +26,24 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	cameraMovement()
 	
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_cancel") and canPause:
 		if gameIsPaused:
 			gameIsPaused = false
 			$Player.restart()
 			Ui.echapVisibility(false)
+			level.startLevel()
 		else:
 			gameIsPaused = true
 			$Player.pause()
 			Ui.echapVisibility(true)
+			level.pauseLevel()
 
 
 func _on_transition_finished():
+	print("transition finisheddddd ")
 	level.startLevel()
 	$Player.start()
+	canPause = true
 	pass
 
 func cameraMovement():
@@ -64,6 +69,7 @@ func transitionLevel(levelName):
 	$Transition.get_child(0).play("Next_Level_Fade")
 
 func win(hasNextLevel: bool):
+	canPause = false
 	$Player.position += Vector2(0, -10)
 	$Player.pause()
 	Ui.enableNextButton(hasNextLevel)

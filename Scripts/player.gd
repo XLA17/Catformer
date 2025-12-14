@@ -15,6 +15,7 @@ var isAttacking = false
 var isDead = false
 var isTakingDamage = false
 var health
+var isPaused = false
 
 var deathSound = preload("res://Sound/Death_sound.mp3")
 var attackSound = preload("res://Sound/Attack_sound.wav")
@@ -25,7 +26,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 
-	if !isDead:
+	if !isDead and !isPaused:
 		_setGravity(delta)
 		_dash()
 		_jump()
@@ -35,21 +36,30 @@ func _physics_process(delta: float) -> void:
 		_animation_played()
 
 func start():
+	print("start")
+	isPaused = false
 	$Animation.play("Idle")
 	isDead = false
 	$Collider.set_deferred("disabled", false)
 	health = MAX_HEALTH
 	Ui.setHealth(health-1)
 	set_physics_process(true)
+	visible = true
 
 func pause():
-	$Animation.play("Idle")
+	print("pause")
+	isPaused = true
+	#$Animation.play("Idle")
 	#$Collider.set_deferred("disabled", true)
 	#velocity = Vector2.ZERO
 	set_physics_process(false)
+	#visible = false
 
 func restart():
+	print("restart")
+	isPaused = false
 	set_physics_process(true)
+	visible = true
 
 func _setGravity(delta: float):
 	if not is_on_floor():

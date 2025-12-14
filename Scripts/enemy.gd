@@ -33,6 +33,9 @@ func start():
 	set_physics_process(true)
 	pass
 
+func pause():
+	set_physics_process(false)
+
 func _setGravity(delta: float):
 	if not is_on_floor():
 		velocity += get_gravity() * delta

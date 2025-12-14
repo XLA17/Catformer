@@ -24,4 +24,7 @@ func _on_next_level_zone_body_entered(_body: Node2D) -> void:
 func startLevel():
 	for enemy in $Enemies.get_children():
 		enemy.start()
-	pass
+
+func pauseLevel():
+	for enemy in $Enemies.get_children():
+		enemy.pause()
