@@ -4,6 +4,7 @@ const OFFSET_CAMERA_PLAYER = 30
 
 var level: Node2D
 var lateLevel: Node2D
+var gameIsPaused = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,12 +17,23 @@ func _ready() -> void:
 	Ui.heartsVisibility(true)
 	$Transition.connect("anim_transition_finished", Callable(self, "_on_transition_finished"))
 	Ui.get_node("DeathScreen").connect("restartLevel", Callable(self,"restartLevel"))
+	Ui.get_node("EchapScreen").connect("restartLevel", Callable(self,"restartLevel"))
 	Ui.get_node("win_screen").connect("restartLevel", Callable(self,"restartLevel"))
 	Ui.get_node("win_screen").connect("nextLevel", Callable(self, "nextLevel"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	cameraMovement()
+	
+	if Input.is_action_just_pressed("ui_cancel"):
+		if gameIsPaused:
+			gameIsPaused = false
+			$Player.restart()
+			Ui.echapVisibility(false)
+		else:
+			gameIsPaused = true
+			$Player.pause()
+			Ui.echapVisibility(true)
 
 
 func _on_transition_finished():
@@ -52,7 +64,6 @@ func transitionLevel(levelName):
 	$Transition.get_child(0).play("Next_Level_Fade")
 
 func win(hasNextLevel: bool):
-	print("test")
 	$Player.position += Vector2(0, -10)
 	$Player.pause()
 	Ui.enableNextButton(hasNextLevel)

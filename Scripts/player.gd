@@ -45,8 +45,11 @@ func start():
 func pause():
 	$Animation.play("Idle")
 	#$Collider.set_deferred("disabled", true)
-	velocity = Vector2.ZERO
+	#velocity = Vector2.ZERO
 	set_physics_process(false)
+
+func restart():
+	set_physics_process(true)
 
 func _setGravity(delta: float):
 	if not is_on_floor():
