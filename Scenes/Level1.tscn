@@ -30,6 +30,7 @@ region = Rect2(87, 1, 21, 16)
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_joc8x")
+hasNextLevel = true
 
 [node name="Flag" parent="." instance=ExtResource("3_t3or0")]
 position = Vector2(860, 18)

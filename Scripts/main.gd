@@ -10,14 +10,14 @@ func _ready() -> void:
 	level = Levels.loadScene(Globals.levelNumber)
 	$Transition.updateLevelName(level.name)
 	$Transition.get_child(0).play("New_Level_Fade")
-	level.connect("nextLevel", Callable(self, "nextLevel"))
+	level.connect("win", Callable(self, "win"))
 	$Player.position = level.get_node("PlayerStartPos").position
 	add_child(level)
 	Ui.heartsVisibility(true)
 	$Transition.connect("anim_transition_finished", Callable(self, "_on_transition_finished"))
-	#print(Ui.has_node("DeathScreen"))
 	Ui.get_node("DeathScreen").connect("restartLevel", Callable(self,"restartLevel"))
-
+	Ui.get_node("win_screen").connect("restartLevel", Callable(self,"restartLevel"))
+	Ui.get_node("win_screen").connect("nextLevel", Callable(self, "nextLevel"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -51,12 +51,18 @@ func transitionLevel(levelName):
 	$Transition.get_child(0).get_child(1).text = levelName
 	$Transition.get_child(0).play("Next_Level_Fade")
 
+func win(hasNextLevel: bool):
+	print("test")
+	$Player.pause()
+	Ui.enableNextButton(hasNextLevel)
+	Ui.winVisibility(true)
+
 func nextLevel():
 	Globals.levelNumber += 1
 	lateLevel = level
 	print(level)
 	level = Levels.loadScene(Globals.levelNumber)
-	level.connect("nextLevel", Callable(self, "nextLevel"))
+	level.connect("win", Callable(self, "win"))
 	transitionLevel(level.name)
 	$LoadingTimer.start()
 	$Player.pause()
@@ -73,7 +79,7 @@ func restartLevel() -> void:
 	lateLevel = level
 	print(level)
 	level = Levels.loadScene(Globals.levelNumber)
-	level.connect("nextLevel", Callable(self, "nextLevel"))
+	level.connect("win", Callable(self, "win"))
 	transitionLevel(level.name)
 	$LoadingTimer.start()
 	$Player.pause()

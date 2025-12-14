@@ -45,7 +45,6 @@ position = Vector2(-274, -51)
 position = Vector2(18, -414)
 
 [node name="NextLevelZone" type="Area2D" parent="."]
-visible = false
 position = Vector2(18, -414)
 collision_layer = 0
 

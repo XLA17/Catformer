@@ -35,17 +35,18 @@ func _physics_process(delta: float) -> void:
 		_animation_played()
 
 func start():
-	set_physics_process(true)
 	$Animation.play("Idle")
 	isDead = false
-	$Collider.disabled = false
+	$Collider.set_deferred("disabled", false)
 	health = MAX_HEALTH
 	Ui.setHealth(health-1)
+	set_physics_process(true)
 
 func pause():
-	set_physics_process(false)
 	$Animation.play("Idle")
-	$Collider.disabled = true
+	$Collider.set_deferred("disabled", true)
+	velocity = Vector2.ZERO
+	set_physics_process(false)
 
 func _setGravity(delta: float):
 	if not is_on_floor():

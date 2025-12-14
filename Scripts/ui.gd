@@ -48,3 +48,6 @@ func winVisibility(visibility):
 	
 func deathVisibility(visibility):
 	$DeathScreen.visible = visibility
+
+func enableNextButton(value: bool):
+	$win_screen.enableNextButton(value)
