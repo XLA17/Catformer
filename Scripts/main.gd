@@ -53,14 +53,15 @@ func transitionLevel(levelName):
 
 func win(hasNextLevel: bool):
 	print("test")
+	$Player.position += Vector2(0, -10)
 	$Player.pause()
 	Ui.enableNextButton(hasNextLevel)
 	Ui.winVisibility(true)
 
+
 func nextLevel():
 	Globals.levelNumber += 1
 	lateLevel = level
-	print(level)
 	level = Levels.loadScene(Globals.levelNumber)
 	level.connect("win", Callable(self, "win"))
 	transitionLevel(level.name)
@@ -72,15 +73,13 @@ func _on_loading_timer_timeout() -> void:
 	lateLevel.queue_free()
 	$Player.position = level.get_node("PlayerStartPos").position
 	call_deferred("add_child", level)
-	#$Player.get_node("Collider").disabled = false
+	Ui.winVisibility(false)
 
 
 func restartLevel() -> void:
 	lateLevel = level
-	print(level)
 	level = Levels.loadScene(Globals.levelNumber)
 	level.connect("win", Callable(self, "win"))
 	transitionLevel(level.name)
 	$LoadingTimer.start()
 	$Player.pause()
-	

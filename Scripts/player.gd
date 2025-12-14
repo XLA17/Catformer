@@ -44,7 +44,7 @@ func start():
 
 func pause():
 	$Animation.play("Idle")
-	$Collider.set_deferred("disabled", true)
+	#$Collider.set_deferred("disabled", true)
 	velocity = Vector2.ZERO
 	set_physics_process(false)
 

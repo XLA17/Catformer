@@ -4,8 +4,9 @@ extends Control
 signal restartLevel
 
 func _on_restart_button_down() -> void:
-	Ui.deathVisibility(false)
 	emit_signal("restartLevel")
+	await get_tree().create_timer(1).timeout
+	Ui.deathVisibility(false)
 
 
 func _on_menu_button_down() -> void:

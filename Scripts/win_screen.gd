@@ -6,13 +6,15 @@ signal restartLevel
 signal nextLevel
 
 func _on_next_pressed() -> void:
-	Ui.winVisibility(false)
 	emit_signal("nextLevel")
+	await get_tree().create_timer(1).timeout
+	Ui.winVisibility(false)
 
 
 func _on_restart_pressed() -> void:
-	Ui.winVisibility(false)
 	emit_signal("restartLevel")
+	await get_tree().create_timer(1).timeout
+	Ui.winVisibility(false)
 
 
 func _on_menu_pressed() -> void:
