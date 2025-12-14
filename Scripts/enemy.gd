@@ -88,7 +88,7 @@ func playSound(sound):
 	$Audio.play()
 
 func _attack(body: Node2D):
-	if body.has_method("takeDamage") && !body.isTakingDamage && !isTakingDamage && !body.isDead:
+	if body.has_method("takeDamage") && !body.isTakingDamage && !body.isDead:
 		body.takeDamage()
 		isAttacking = true
 		$AttackTimer.start()

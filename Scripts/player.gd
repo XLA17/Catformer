@@ -44,22 +44,16 @@ func start():
 	health = MAX_HEALTH
 	Ui.setHealth(health-1)
 	set_physics_process(true)
-	visible = true
 
 func pause():
 	print("pause")
 	isPaused = true
-	#$Animation.play("Idle")
-	#$Collider.set_deferred("disabled", true)
-	#velocity = Vector2.ZERO
 	set_physics_process(false)
-	#visible = false
 
 func restart():
 	print("restart")
 	isPaused = false
 	set_physics_process(true)
-	visible = true
 
 func _setGravity(delta: float):
 	if not is_on_floor():
